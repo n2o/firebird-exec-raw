@@ -93,3 +93,5 @@ ori
 .directory
 
 .lein-repl-history
+.nrepl-port
+.#*
