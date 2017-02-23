@@ -28,6 +28,7 @@
 (defn -main []
   (try
     (exec)
+    (spit "success.log" (str (new java.util.Date) " SQL Query war erfolgreich." "\n") :append true)
     (catch Exception e (spit "error.log" (str (new java.util.Date) " Folgender Fehler ist aufgetreten: " (.getMessage e) "\n") :append true))))
 
 ;; (-main)
