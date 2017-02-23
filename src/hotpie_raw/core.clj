@@ -7,12 +7,8 @@
             [korma.core :as sql])
   (:use [korma.db]))
 
-(def data
-  (edn/read-string (slurp "config.edn")))
-
-(def sql
-  (slurp "query.sql"))
-
+(def data (edn/read-string (slurp "config.edn")))
+(def sql (slurp "query.sql"))
 (def db-config
   (let [config (:firebird data)]
     (firebird {:db         (:database config)
@@ -34,4 +30,4 @@
     (exec)
     (catch Exception e (spit "error.log" (str (new java.util.Date) " Folgender Fehler ist aufgetreten: " (.getMessage e) "\n") :append true))))
 
-#_(-main)
+;; (-main)
