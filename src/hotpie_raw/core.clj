@@ -1,14 +1,11 @@
 (ns hotpie-raw.core
   (:gen-class)
   (:require [clojure.edn :as edn]
-            [clojure.data.csv :as csv]
-            [clojure.string :refer [upper-case]]
-            [clojure.java.io :as io]
-            [korma.core :as sql])
-  (:use [korma.db]))
+            [korma.core :as sql]
+            [korma.db :refer :all]))
 
 (def data (edn/read-string (slurp "config.edn")))
-(def sql (slurp "query.sql"))
+(def sql-query (slurp "query.sql"))
 (def db-config
   (let [config (:firebird data)]
     (firebird {:db         (:database config)
@@ -23,12 +20,14 @@
 (defn exec
   "Makes database query and returns all matching rows fitting to :query."
   []
-  (sql/exec-raw fdb sql :results))
+  (sql/exec-raw fdb sql-query :results))
 
 (defn -main []
   (try
-    (exec)
+    (println (exec))
     (spit "success.log" (str (new java.util.Date) " SQL Query war erfolgreich." "\n") :append true)
     (catch Exception e (spit "error.log" (str (new java.util.Date) " Folgender Fehler ist aufgetreten: " (.getMessage e) "\n") :append true))))
 
-;; (-main)
+(comment
+  (-main)
+  :foo)

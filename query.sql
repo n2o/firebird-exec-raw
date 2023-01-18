@@ -1,1 +1,1 @@
-SELECT * FROM lskopf
+SELECT * FROM adresse

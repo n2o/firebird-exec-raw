@@ -2,4 +2,4 @@
             :port     3050
             :username "sysdba"
             :password "masterkey"
-            :database "/home/firebird/foo.fdb"}}
+            :database "/firebird/data/test"}}
